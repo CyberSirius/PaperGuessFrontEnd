@@ -1,25 +1,61 @@
 /* app css stylesheet */
 
 .menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
 }
 
 .menu:before {
-  content: "[";
+    content: "[";
 }
 
 .menu:after {
-  content: "]";
+    content: "]";
 }
 
 .menu > li {
-  display: inline;
+    display: inline;
 }
 
 .menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+    content: "|";
+    padding-right: 0.3em;
+}
+
+#progress {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+#card1 {
+    z-index: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+}
+
+#card2 {
+    z-index: 1;
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+}
+
+#card3 {
+    z-index: 2;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+    width: 300px;
+    height: 300px;
 }

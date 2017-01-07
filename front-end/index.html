@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="MoviesApp">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Movies</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <!--build:css issboard.min.css-->
-    <link href="../node_modules/angular-material/angular-material.min.css" rel="stylesheet"/>
+    <link href="node_modules/angular-material/angular-material.min.css" rel="stylesheet"/>
     <link href="app.css" rel="stylesheet">
-    <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css">
+    <link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
     <!--endbuild-->
     <!--endinject-->
     <script src="node_modules/angular/angular.min.js"></script>
@@ -24,12 +24,12 @@
     <script src="node_modules/angular-jwt/dist/angular-jwt.min.js"></script>
     <script src="node_modules/angular-utils-pagination/dirPagination.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/angular-signalr-hub/signalr-hub.min.js"></script>
     <!-- inject:js -->
     <!-- endinject -->
 </head>
-<body layout="row">
-sada
-<div flex ui-view>
+<body layout="row" ng-app="MoviesApp">
+<div ui-view flex>
 </div>
 </body>
 </html>

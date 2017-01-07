@@ -1,0 +1,25 @@
+<div flex md-whiteframe="5">
+    <md-content flex>
+        <md-list flex>
+            <md-subheader>
+                Chat
+            </md-subheader>
+            <md-list-item class="md-3-line" ng-repeat="msg in $ctrl.msgs">
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{msg.UserName}}</h3>
+                    <h4>{{msg.DateTime}}</h4>
+                    <p>{{msg.Message}}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-content>
+    <div layout="row">
+        <md-input-container class="md-block" flex="90">
+            <label>Write something...</label>
+            <textarea rows="3" md-select-on-focus></textarea>
+        </md-input-container>
+        <md-button class="md-fab md-primary">
+            <md-icon>send</md-icon>
+        </md-button>
+    </div>
+</div>

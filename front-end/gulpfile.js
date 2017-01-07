@@ -15,15 +15,15 @@ var gulp = require('gulp'),
     templateCache = require('gulp-angular-templatecache');
 
 
-gulp.task('inject', function () {
+gulp.task('inject',[] ,function () {
     // console.log(inject(gulp.src(['./app/**/*.js'])));
     return gulp.src('index.html')
-        .pipe(inject(gulp.src(['./app/**/*.js']).pipe(angularFilesort())))
+        .pipe(inject(gulp.src(['app/**/*.js', '!app/node_modules/**/*']).pipe(angularFilesort()),{ignorePath: 'app/'}))
         .pipe(gulp.dest('./app'));
 });
 
 gulp.task('copy-npm', function () {
-    return gulp.src(['node_modules/**/*']).pipe(gulp.dest('app/node_modules'));
+    return gulp.src(gnf(), {base: './'}).pipe(gulp.dest('app'));
 });
 
 gulp.task('build', ['copy-dep'], function () {
@@ -36,7 +36,7 @@ gulp.task('build', ['copy-dep'], function () {
         }));
 });
 
-gulp.task('dirty-build', ['template-cache'], function () {
+gulp.task('dirty-build', function () {
     gulp.src('app/**/*').pipe(gulp.dest('build'));
     gulp.src('app/index.html')
         .pipe(inject(gulp.src(['build/**/*.js'])
@@ -47,16 +47,16 @@ gulp.task('dirty-build', ['template-cache'], function () {
         }));
 });
 gulp.task('template-cache', function () {
-    return gulp.src('app/**/*.html')
+    return gulp.src(['app/**/*.html','!app/index.html'])
         .pipe(templateCache('app.templates.js', {module: 'MoviesApp', root: 'app'}))
         .pipe(gulp.dest('app'));
 });
 
-gulp.task('watch', [], function () {
+gulp.task('watch', ['inject'], function () {
     browserSync.init({
         server: {
-            baseDir: 'app'
+            baseDir: './app'
         }
     });
-    gulp.watch('app/**/*', ['inject']);
+    gulp.watch(['app/**/*'], ['inject']);
 });

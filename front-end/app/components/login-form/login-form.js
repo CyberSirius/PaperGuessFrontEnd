@@ -3,7 +3,7 @@
     angular
         .module('MoviesApp')
         .component('loginForm', {
-            templateUrl: 'login-form.html',
+            templateUrl: 'components/login-form/login-form.html',
             bindings: {},
             controller: loginFormController
         });
@@ -11,5 +11,10 @@
 
     function loginFormController() {
         var ctrl = this;
+        ctrl.sendLoginInfo = sendLoginInfo;
+        ctrl.user = {};
+        function sendLoginInfo() {
+            console.log(ctrl.user);
+        }
     }
 })();

@@ -28,12 +28,43 @@
     //     Object.assign(env, window.__env);
     //
     // }
-    angular
-        .module('MoviesApp', [
-            'ngMaterial',
-            'ngRoute',
-            'ngMessages',
-            'angularUtils.directives.dirPagination',
-            'ui.router'
-        ]);
+    angular.module('MoviesApp', [
+        'ngMaterial',
+        'ngRoute',
+        'ngMessages',
+        'angularUtils.directives.dirPagination',
+        'ui.router',
+        'SignalR'
+    ]);
+    angular.module('MoviesApp').config(config);
+    angular.module('MoviesApp').config(routes);
+    config.$inject = ['$mdThemingProvider'];
+    function config($mdThemingProvider) {
+        console.log('hwsai');
+        $mdThemingProvider.theme('default')
+            .primaryPalette('teal')
+            .accentPalette('blue');
+    }
+
+    routes.inject = ['$stateProvider', '$urlRouterProvider'];
+    function routes($stateProvider) {
+        $stateProvider
+            .state('loginState', {
+                url: '/login',
+                component: 'loginForm'
+            })
+            .state('chatWindow', {
+                url: '/chat',
+                component: 'chatWindow'
+            })
+            .state('registerForm', {
+                url: '/register',
+                component: 'registerForm'
+            })
+            .state('gameWindow', {
+                url: '/game',
+                component: 'gameWindow'
+            })
+    }
+
 })();
