@@ -34,7 +34,8 @@
         'ngMessages',
         'angularUtils.directives.dirPagination',
         'ui.router',
-        'SignalR'
+        'SignalR',
+        'ngStomp'
     ]);
     angular.module('MoviesApp').config(config);
     angular.module('MoviesApp').config(routes);
