@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MoviesApp.iml" filepath="$PROJECT_DIR$/MoviesApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommunicationServer/CommunicationServer.iml" filepath="$PROJECT_DIR$/CommunicationServer/CommunicationServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PaperGuess.iml" filepath="$PROJECT_DIR$/PaperGuess.iml" />
       <module fileurl="file://$PROJECT_DIR$/front-end/front-end.iml" filepath="$PROJECT_DIR$/front-end/front-end.iml" />
     </modules>
   </component>

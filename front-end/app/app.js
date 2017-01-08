@@ -55,7 +55,7 @@
             })
             .state('chatWindow', {
                 url: '/chat',
-                component: 'chatWindow'
+                component: 'paperPieces'
             })
             .state('registerForm', {
                 url: '/register',
