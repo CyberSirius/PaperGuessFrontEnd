@@ -7,15 +7,23 @@
             bindings: {},
             controller: loginFormController
         });
-    loginFormController.$inject = ['$stomp'];
+    loginFormController.$inject = ['$stomp', 'playerService'];
 
-    function loginFormController($stomp) {
+    function loginFormController($stomp, playerService) {
         var ctrl = this;
-        ctrl.sendLoginInfo = sendLoginInfo;
+        ctrl.sendPlayerName = sendPlayerName;
+        ctrl.getPlayers = getPlayers;
         testNgStomp();
-        ctrl.user = {};
-        function sendLoginInfo() {
-            console.log(ctrl.user);
+        function sendPlayerName() {
+            console.log(ctrl.name);
+            var request = {
+                "name": ctrl.name
+            };
+            console.log(playerService.sendPlayerName(request));
+        }
+
+        function getPlayers() {
+            console.log(playerService.getPlayers());
         }
 
         function testNgStomp() {
