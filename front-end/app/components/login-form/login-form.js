@@ -7,23 +7,34 @@
             bindings: {},
             controller: loginFormController
         });
-    loginFormController.$inject = ['$stomp', 'playerService'];
+    loginFormController.$inject = ['$stomp', 'playerService', '$ngRedux'];
 
-    function loginFormController($stomp, playerService) {
+    function loginFormController($stomp, playerService, $ngRedux) {
         var ctrl = this;
+        var store = $ngRedux;
         ctrl.sendPlayerName = sendPlayerName;
         ctrl.getPlayers = getPlayers;
-        testNgStomp();
+
+        // testNgStomp();
+        var unsubscribe = store.subscribe(function () {
+            console.log(store.getState());
+        });
+
         function sendPlayerName() {
             console.log(ctrl.name);
             var request = {
                 "name": ctrl.name
             };
-            console.log(playerService.sendPlayerName(request));
+            store.dispatch({
+                type: 'TEST_ACTION',
+                data: ctrl.name
+            });
+            // console.log(playerService.sendPlayerName(request));
         }
 
         function getPlayers() {
-            console.log(playerService.getPlayers());
+            // console.log(playerService.getPlayers());
+            unsubscribe();
         }
 
         function testNgStomp() {
