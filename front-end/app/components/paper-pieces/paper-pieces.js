@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('MoviesApp')
+        .module('PaperGuess')
         .component('paperPieces', {
             templateUrl: 'components/paper-pieces/paper-pieces.html',
             bindings: {},

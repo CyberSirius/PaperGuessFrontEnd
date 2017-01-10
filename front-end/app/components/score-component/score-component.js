@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('MoviesApp')
+        .module('PaperGuess')
         .component('scoreComponent', {
             templateUrl: 'components/score-component/score-component.html',
             bindings: {

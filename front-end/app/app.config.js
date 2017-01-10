@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('MoviesApp').config(config);
+    angular.module('PaperGuess').config(config);
     config.$inject = ['$mdThemingProvider'];
     function config($mdThemingProvider) {
         $mdThemingProvider.theme('default')

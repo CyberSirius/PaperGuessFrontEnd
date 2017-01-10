@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('MoviesApp').factory('playerService', playerService);
+    angular.module('PaperGuess').factory('playerService', playerService);
     playerService.$inject = ['$http'];
     function playerService($http) {
         return {

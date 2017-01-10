@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('MoviesApp')
+        .module('PaperGuess')
         .component('chatWindow', {
             templateUrl: 'components/chat-window/chat-window.html',
             bindings: {},

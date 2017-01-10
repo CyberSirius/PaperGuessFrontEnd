@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('MoviesApp')
+        .module('PaperGuess')
         .component('timer', {
             templateUrl: 'components/timer/timer.html',
             bindings: {

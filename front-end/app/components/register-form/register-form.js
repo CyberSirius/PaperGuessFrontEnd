@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('MoviesApp')
+        .module('PaperGuess')
         .component('registerForm', {
             templateUrl: 'components/register-form/register-form.html',
             bindings: {},

@@ -14,11 +14,10 @@ var gulp = require('gulp'),
     htmlmin = require('gulp-htmlmin'),
     templateCache = require('gulp-angular-templatecache');
 
-
-gulp.task('inject',[] ,function () {
+gulp.task('inject', [], function () {
     // console.log(inject(gulp.src(['./app/**/*.js'])));
     return gulp.src('index.html')
-        .pipe(inject(gulp.src(['app/**/*.js', '!app/node_modules/**/*']).pipe(angularFilesort()),{ignorePath: 'app/'}))
+        .pipe(inject(gulp.src(['app/**/*.js', '!app/node_modules/**/*']).pipe(angularFilesort()), {ignorePath: 'app/'}))
         .pipe(gulp.dest('./app'));
 });
 
@@ -47,8 +46,8 @@ gulp.task('dirty-build', function () {
         }));
 });
 gulp.task('template-cache', function () {
-    return gulp.src(['app/**/*.html','!app/index.html'])
-        .pipe(templateCache('app.templates.js', {module: 'MoviesApp', root: 'app'}))
+    return gulp.src(['app/**/*.html', '!app/index.html'])
+        .pipe(templateCache('app.templates.js', {module: 'PaperGuess', root: 'app'}))
         .pipe(gulp.dest('app'));
 });
 

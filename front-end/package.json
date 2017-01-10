@@ -19,6 +19,7 @@
     "animate.css": "^3.5.2",
     "jquery": "^3.1.1",
     "moment": "^2.15.0",
+    "ng-redux": "^3.4.0-beta.1",
     "ng-stomp": "^0.3.0"
   },
   "devDependencies": {

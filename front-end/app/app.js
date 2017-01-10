@@ -28,17 +28,19 @@
     //     Object.assign(env, window.__env);
     //
     // }
-    angular.module('MoviesApp', [
+    angular.module('PaperGuess', [
         'ngMaterial',
         'ngRoute',
         'ngMessages',
         'angularUtils.directives.dirPagination',
         'ui.router',
         'SignalR',
-        'ngStomp'
+        'ngStomp',
+        'ngRedux'
     ]);
-    angular.module('MoviesApp').config(config);
-    angular.module('MoviesApp').config(routes);
+    angular.module('PaperGuess').config(config);
+    angular.module('PaperGuess').config(routes);
+    angular.module('PaperGuess').config(redux);
     config.$inject = ['$mdThemingProvider'];
     function config($mdThemingProvider) {
         console.log('hwsai');
@@ -68,4 +70,29 @@
             })
     }
 
-})();
+    var initialState = {
+        somethingToLog: 'nothing to log yet'
+    };
+    redux.$inject = ['$ngReduxProvider'];
+    function redux($ngReduxProvider) {
+        var reducer = testReducer;
+        $ngReduxProvider.createStoreWith({
+            reducer: reducer
+        });
+    }
+
+    function testReducer(state, action) {
+        if (typeof state === 'undefined')
+            return initialState;
+        switch (action.type) {
+            case 'TEST_ACTION':
+                return Object.assign({}.state, {
+                    somethingToLog: action.data
+                });
+            default:
+                return state
+        }
+    }
+
+})
+();
