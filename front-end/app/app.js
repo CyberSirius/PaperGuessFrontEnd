@@ -36,14 +36,14 @@
         'ui.router',
         'SignalR',
         'ngStomp',
-        'ngRedux'
+        'ngRedux',
+        'material.components.expansionPanels'
     ]);
     angular.module('PaperGuess').config(config);
     angular.module('PaperGuess').config(routes);
-    angular.module('PaperGuess').config(redux);
+    angular.module('PaperGuess').config(createStore);
     config.$inject = ['$mdThemingProvider'];
     function config($mdThemingProvider) {
-        console.log('hwsai');
         $mdThemingProvider.theme('default')
             .primaryPalette('teal')
             .accentPalette('blue');
@@ -56,43 +56,112 @@
                 url: '/login',
                 component: 'loginForm'
             })
-            .state('chatWindow', {
+            .state('chatState', {
                 url: '/chat',
-                component: 'paperPieces'
+                component: 'chatWindow'
             })
-            .state('registerForm', {
+            .state('registerState', {
                 url: '/register',
                 component: 'registerForm'
             })
-            .state('gameWindow', {
+            .state('gameState', {
                 url: '/game',
                 component: 'gameWindow'
+            })
+            .state('homeState', {
+                url: '/home',
+                component: 'homePage'
+            })
+            .state('testState', {
+                url: '/test',
+                component: 'homePage'
             })
     }
 
     var initialState = {
-        somethingToLog: 'nothing to log yet'
+        test: {
+            somethingToLog: 'nothing to log yet',
+        },
+        player: {
+            name: null,
+            id: null
+        },
+        room: {
+            rooms: [],
+            currentRoom: null
+        }
     };
-    redux.$inject = ['$ngReduxProvider'];
-    function redux($ngReduxProvider) {
-        var reducer = testReducer;
+    createStore.$inject = ['$ngReduxProvider', '$windowProvider'];
+    function createStore($ngReduxProvider, $windowProvider) {
+        var reducers = {
+            'player': playerReducer,
+            'test': testReducer,
+            'room': roomReducer
+        };
+        let window = $windowProvider.$get();
+        var store = window.Redux.combineReducers(reducers);
         $ngReduxProvider.createStoreWith({
-            reducer: reducer
+            store: store
         });
     }
 
-    function testReducer(state, action) {
-        if (typeof state === 'undefined')
-            return initialState;
+    function roomReducer(room, action) {
+        if (typeof room === 'undefined')
+            return initialState.room;
+        switch (action.type) {
+            case 'ADD_NEW_ROOM': {
+                room.rooms = angular.copy(room.rooms);
+                room.rooms.push({
+                        Id: action.room.Id,
+                        Host: action.room.Host,
+                        Players: action.room.Players,
+                        Game: action.room.Game,
+                        Name: action.room.Name
+                    }
+                );
+                return room;
+            }
+            case 'ADD_CURRENT_ROOMS':
+                return Object.assign({}, room, {
+                    rooms: action.rooms
+                });
+            case 'ADD_PLAYER_ROOM':
+                return Object.assign({}, room, {
+                    currentRoom: action.currentRoom
+                });
+            default:
+                return room;
+        }
+    }
+
+
+    function testReducer(test, action) {
+        if (typeof test === 'undefined')
+            return initialState.test;
         switch (action.type) {
             case 'TEST_ACTION':
-                return Object.assign({}.state, {
+                return Object.assign({}, test, {
                     somethingToLog: action.data
                 });
             default:
-                return state
+                return test
         }
     }
+
+    function playerReducer(player, action) {
+        if (typeof player === 'undefined')
+            return initialState.player;
+        switch (action.type) {
+            case 'CREATE_CURRENT_PLAYER':
+                return Object.assign({}, player, {
+                    name: action.player.Name,
+                    id: action.player.Id
+                });
+            default:
+                return player;
+        }
+    }
+
 
 })
 ();

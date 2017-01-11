@@ -7,9 +7,12 @@
             bindings: {},
             controller: gameWindowController
         });
-    gameWindowController.$inject = [];
+    gameWindowController.$inject = ['$ngRedux'];
 
-    function gameWindowController() {
+    function gameWindowController($ngRedux) {
         var ctrl = this;
+        var store = $ngRedux;
+        console.log(store.getState().store.room.currentRoom);
+        ctrl.room = store.getState().store.room.currentRoom;
     }
 })();

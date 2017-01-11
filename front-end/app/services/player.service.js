@@ -7,10 +7,10 @@
             sendPlayerName: sendPlayerName,
             getPlayers: getPlayers
         };
-        function sendPlayerName(name) {
-            var SERVER_URL = 'http://192.168.0.105/paperguess/api';
+        function sendPlayerName(name, callback) {
+            var SERVER_URL = 'http://192.168.0.102/paperguess/api';
             return $http.put(SERVER_URL + '/players', name).then(function (response) {
-                return response.data;
+                callback(response);
             }, function (error) {
                 console.log(error);
             })

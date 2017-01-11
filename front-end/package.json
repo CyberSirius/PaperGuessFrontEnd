@@ -10,6 +10,7 @@
     "angular-clipboard": "^1.5.0",
     "angular-jwt": "^0.1.6",
     "angular-material": "^1.1.0",
+    "angular-material-expansion-panel": "^0.7.1",
     "angular-messages": "^1.5.8",
     "angular-route": "^1.5.8",
     "angular-signalr-hub": "^1.6.2",
@@ -20,7 +21,8 @@
     "jquery": "^3.1.1",
     "moment": "^2.15.0",
     "ng-redux": "^3.4.0-beta.1",
-    "ng-stomp": "^0.3.0"
+    "ng-stomp": "^0.3.0",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "browser-sync": "^2.14.0",

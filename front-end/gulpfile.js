@@ -57,5 +57,5 @@ gulp.task('watch', ['inject'], function () {
             baseDir: './app'
         }
     });
-    gulp.watch(['app/**/*'], ['inject']);
+    gulp.watch(['app/**/*', '!app/index.html'], ['inject']);
 });

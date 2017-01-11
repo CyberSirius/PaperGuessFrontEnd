@@ -1,0 +1,31 @@
+<!--<md-input-container>-->
+<!--<label>Room name</label>-->
+<!--<input ng-model="$ctrl.newRoom.name">-->
+<!--<md-button ng-click="$ctrl.createNewRoom()">Create room</md-button>-->
+<!--</md-input-container>-->
+
+<md-expansion-panel ng-repeat="room in $ctrl.rooms" multiple>
+    <md-expansion-panel-collapsed>
+        <div class="md-title">{{room.Name}}</div>
+        <div class="md-summary">{{room.Players.length}} players currently in room</div>
+        <md-button class="md-raised md-primary" ng-click="$event.stopPropagation();$ctrl.enterRoom(room)">enter room
+        </md-button>
+    </md-expansion-panel-collapsed>
+    <md-expansion-panel-expanded>
+        <md-expansion-panel-header ng-click="$panel.collapse()">
+            <div class="md-title">{{room.Name}}</div>
+            <div class="md-summary">{{room.Players.length}} players currently in room</div>
+            <md-button class="md-raised md-primary" ng-click="$event.stopPropagation();$ctrl.enterRoom(room)">enter
+                room
+            </md-button>
+        </md-expansion-panel-header>
+        <md-expansion-panel-content>
+            <md-list flex>
+                <md-subheader>Players</md-subheader>
+                <md-list-item class="md-1-line" ng-repeat="player in room.Players">
+                    <div class="md-list-item-text">{{player.Name}}</div>
+                </md-list-item>
+            </md-list>
+        </md-expansion-panel-content>
+    </md-expansion-panel-expanded>
+</md-expansion-panel>

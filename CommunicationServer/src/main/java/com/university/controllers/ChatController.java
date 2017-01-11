@@ -1,7 +1,6 @@
 package com.university.controllers;
 
-import com.university.domain.Message;
-import com.university.domain.Request;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,17 +9,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/rest")
 public class ChatController {
 
-    private final MessagesService messagesService;
+    private final CommunicationService communicationService;
 
     @Autowired
-    public ChatController(MessagesService messagesService) {
-        this.messagesService = messagesService;
+    public ChatController(CommunicationService communicationService) {
+        this.communicationService = communicationService;
     }
 
     @RequestMapping(value = "/relay", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
-    public void relayMessage(@RequestBody Request request) throws Exception {
-        System.out.println(request);
-        messagesService.sendMessage(request.getChatId(), new Message(request.getAuthor(), request.getMessage()));
+    public void relayMessage(@RequestBody ObjectNode node) throws Exception {
+        communicationService.sendMessage(node.get("destination").asText(), node.get("payload"));
     }
 }

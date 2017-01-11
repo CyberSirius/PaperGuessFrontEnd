@@ -4,9 +4,9 @@
     </div>
 </md-toolbar>
 <div flex layout="row" layout-fill>
-    <div flex="50">
-        <timer time="30"></timer>
-        <score-component></score-component>
+    <div flex="50" layout="column" layout-fill>
+        <player-list players="$ctrl.room.Players"></player-list>
+        <md-button class="md-raised md-primary">Start game</md-button>
     </div>
-    <chat-window flex="50"></chat-window>
+    <!--<chat-window flex="50"></chat-window>-->
 </div>
