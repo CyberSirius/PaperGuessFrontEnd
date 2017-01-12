@@ -3,10 +3,17 @@
         <span>Paper Guess</span>
     </div>
 </md-toolbar>
-<div flex layout="row" layout-fill>
-    <div flex="50" layout="column" layout-fill>
-        <player-list players="$ctrl.room.players"></player-list>
-        <md-button class="md-raised md-primary" ng-click="$ctrl.startGame()">Start game</md-button>
+<div flex layout="row">
+    <div flex="50" layout="row" layout-fill>
+        <player-list players="$ctrl.room.players" flex="30"></player-list>
+        <paper-pieces flex-offset="5" ng-if="$ctrl.isPaperInputAvailable"></paper-pieces>
+        <paper-value flex-offset="" ng-if="$ctrl.isPlayerExplainer"></paper-value>
     </div>
-    <!--<chat-window flex="50"></chat-window>-->
+    <chat-window flex="50" ng-if="$ctrl.isGameStarted"></chat-window>
 </div>
+<md-button class="md-fab md-fab-bottom-right" ng-click="$ctrl.startGame()">
+    <md-tooltip md-direction="left">
+        Start game
+    </md-tooltip>
+    <md-icon>whatshot</md-icon>
+</md-button>

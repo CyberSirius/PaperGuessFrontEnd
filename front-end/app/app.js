@@ -43,6 +43,23 @@
     angular.module('PaperGuess').config(config);
     angular.module('PaperGuess').config(routes);
     angular.module('PaperGuess').config(createStore);
+    angular.module('PaperGuess').run(['$cookies', '$ngRedux', 'roomService', function ($cookies, $ngRedux, roomService) {
+        var store = $ngRedux;
+        var player = $cookies.getObject('player');
+        if (player) {
+            store.dispatch({
+                type: 'CREATE_CURRENT_PLAYER',
+                player: player
+            });
+            roomService.getRoomByPlayerId(player, function (response) {
+                if (response.data !== null)
+                    store.dispatch({
+                        type: 'ADD_PLAYER_ROOM',
+                        currentRoom: response.data
+                    });
+            })
+        }
+    }]);
     config.$inject = ['$mdThemingProvider'];
     function config($mdThemingProvider) {
         $mdThemingProvider.theme('default')
@@ -75,14 +92,11 @@
             })
             .state('testState', {
                 url: '/test',
-                component: 'homePage'
+                component: 'paperValue'
             })
     }
 
     var initialState = {
-        test: {
-            somethingToLog: 'nothing to log yet',
-        },
         player: {
             name: null,
             id: null
@@ -96,7 +110,6 @@
     function createStore($ngReduxProvider, $windowProvider) {
         var reducers = {
             'player': playerReducer,
-            'test': testReducer,
             'room': roomReducer
         };
         let window = $windowProvider.$get();
@@ -132,20 +145,6 @@
                 });
             default:
                 return room;
-        }
-    }
-
-
-    function testReducer(test, action) {
-        if (typeof test === 'undefined')
-            return initialState.test;
-        switch (action.type) {
-            case 'TEST_ACTION':
-                return Object.assign({}, test, {
-                    somethingToLog: action.data
-                });
-            default:
-                return test
         }
     }
 

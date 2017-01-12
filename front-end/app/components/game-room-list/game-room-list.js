@@ -17,6 +17,7 @@
         getRooms();
         var unsubscribe = store.subscribe(function () {
             ctrl.rooms = store.getState().store.room.rooms;
+            ctrl.player = store.getState().store.player;
         });
 
         function getRooms() {

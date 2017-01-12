@@ -1,23 +1,19 @@
-<div style="position: relative;">
-    <md-card id="card1" flex>
-    </md-card>
-    <md-card id="card2" flex>
-    </md-card>
-    <md-card id="card3" flex>
-        <md-card-title>
-            <md-card-title-text>Type a word</md-card-title-text>
-            <md-subheader>
-                Category: Location
-            </md-subheader>
-        </md-card-title>
-        <md-card-content layout="column" flex="80" layout-align="center center">
-            <md-input-container>
-                <label>Your Word</label>
-                <input type="text" ng-model="$ctrl.word">
-            </md-input-container>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-            <md-button ui-sref="chatWindow">Submit</md-button>
-        </md-card-actions>
-    </md-card>
-</div>
+<md-card flex>
+    <md-card-title>
+        <md-card-title-text>Type a word</md-card-title-text>
+        <md-subheader>
+            {{$ctrl.counter}}/{{$ctrl.maxWords}}
+        </md-subheader>
+    </md-card-title>
+    <md-card-content>
+        <md-input-container>
+            <label>Your Word</label>
+            <input type="text" ng-model="$ctrl.paper.content">
+        </md-input-container>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="$ctrl.submitPaper()" class="md-raised md-primary" ng-disabled="$ctrl.isInputDisabled">
+            Submit
+        </md-button>
+    </md-card-actions>
+</md-card>

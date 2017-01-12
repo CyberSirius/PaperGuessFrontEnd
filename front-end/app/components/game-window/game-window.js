@@ -13,14 +13,33 @@
         var ctrl = this;
         var store = $ngRedux;
         ctrl.startGame = startGame;
-        ctrl.room = store.getState().store.room.currentRoom;
+        ctrl.isPaperInputAvailable = false;
+        ctrl.round = 0;
         ctrl.currentPlayer = store.getState().store.player;
+        ctrl.room = store.getState().store.room.currentRoom;
+        console.log(ctrl.room);
+        function startRoundOne() {
+            ctrl.isGameStarted = true;
+            ctrl.isRoundOne = true;
+            ctrl.isPaperInputAvailable = false;
+            ctrl.isPlayerExplainer = ctrl.currentPlayer.id === ctrl.game.explainer.id;
+        }
+
         stompService.connectToCommunicationServer(ctrl.room, function (payload) {
             console.log(payload);
+            if (payload.action === 'start')
+                ctrl.isPaperInputAvailable = true;
+            if (payload.action === 'round1') {
+                ctrl.round = 1;
+                ctrl.game = payload.game;
+                startRoundOne();
+            }
+            if (payload.action === 'round2')
+                ctrl.round = 2;
         });
-        if (ctrl.currentPlayer.id === null) {
-            ctrl.currentPlayer = $cookies.getObject('player');
-        }
+        // if (ctrl.currentPlayer.id === null) {
+        //     ctrl.currentPlayer = $cookies.getObject('player');
+        // }
         roomService.getRoomByPlayerId(ctrl.currentPlayer, function (response) {
             var room = response.data;
             if (room) {
@@ -35,7 +54,6 @@
             }
         });
         function startGame() {
-            console.log('did you call yourslef????');
             gameService.startGame(ctrl.room, ctrl.currentPlayer, function (response) {
                 console.log(response);
             })
