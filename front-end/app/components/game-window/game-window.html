@@ -5,8 +5,8 @@
 </md-toolbar>
 <div flex layout="row" layout-fill>
     <div flex="50" layout="column" layout-fill>
-        <player-list players="$ctrl.room.Players"></player-list>
-        <md-button class="md-raised md-primary">Start game</md-button>
+        <player-list players="$ctrl.room.players"></player-list>
+        <md-button class="md-raised md-primary" ng-click="$ctrl.startGame()">Start game</md-button>
     </div>
     <!--<chat-window flex="50"></chat-window>-->
 </div>

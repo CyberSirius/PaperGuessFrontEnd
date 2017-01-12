@@ -7,9 +7,17 @@
         return {
             createNewRoom: createNewRoom,
             logInRoom: logInRoom,
-            getRooms: getRooms
+            getRooms: getRooms,
+            getRoomByPlayerId: getRoomByPlayerId
         };
+        function getRoomByPlayerId(player, callback) {
+            return $http.get(SERVER_URL + '?playerId=' + player.id).then(function (response) {
+                return callback(response);
+            });
+        }
+
         function createNewRoom(room, callback) {
+            console.log(room);
             var message = {
                 clientMessage: {
                     playerId: room.host.id
@@ -19,7 +27,6 @@
                 }
             };
             return $http.put(SERVER_URL, message).then(function (response) {
-                console.log(response.data);
                 callback(response.data);
             }, function (error) {
                 console.log(error);
@@ -28,7 +35,7 @@
 
         function logInRoom(room, player, callback) {
             var message = {
-                "roomId": room.Id,
+                "roomId": room.id,
                 "playerId": player.id
             };
             return $http.post(SERVER_URL, message).then(function (response) {

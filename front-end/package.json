@@ -8,6 +8,7 @@
     "angular-animate": "^1.5.8",
     "angular-aria": "^1.5.8",
     "angular-clipboard": "^1.5.0",
+    "angular-cookies": "^1.5.8",
     "angular-jwt": "^0.1.6",
     "angular-material": "^1.1.0",
     "angular-material-expansion-panel": "^0.7.1",

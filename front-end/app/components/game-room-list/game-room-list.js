@@ -46,7 +46,6 @@
         ctrl.createNewRoom = createNewRoom;
         function createNewRoom() {
             roomService.createNewRoom(ctrl.newRoom, function (room) {
-                console.log(room);
                 store.dispatch({
                     type: 'ADD_NEW_ROOM',
                     room: room

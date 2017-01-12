@@ -37,7 +37,8 @@
         'SignalR',
         'ngStomp',
         'ngRedux',
-        'material.components.expansionPanels'
+        'material.components.expansionPanels',
+        'ngCookies'
     ]);
     angular.module('PaperGuess').config(config);
     angular.module('PaperGuess').config(routes);
@@ -112,11 +113,11 @@
             case 'ADD_NEW_ROOM': {
                 room.rooms = angular.copy(room.rooms);
                 room.rooms.push({
-                        Id: action.room.Id,
-                        Host: action.room.Host,
-                        Players: action.room.Players,
-                        Game: action.room.Game,
-                        Name: action.room.Name
+                    id: action.room.id,
+                    host: action.room.host,
+                    players: action.room.players,
+                    game: action.room.name,
+                    name: action.room.name,
                     }
                 );
                 return room;
@@ -154,8 +155,8 @@
         switch (action.type) {
             case 'CREATE_CURRENT_PLAYER':
                 return Object.assign({}, player, {
-                    name: action.player.Name,
-                    id: action.player.Id
+                    name: action.player.name,
+                    id: action.player.id
                 });
             default:
                 return player;

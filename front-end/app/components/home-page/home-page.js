@@ -7,9 +7,9 @@
             bindings: {},
             controller: homePageController
         });
-    homePageController.$inject = ['$mdDialog', 'roomService', '$ngRedux'];
+    homePageController.$inject = ['$mdDialog', 'roomService', '$ngRedux', '$cookies', '$state'];
 
-    function homePageController($mdDialog, roomService, $ngRedux) {
+    function homePageController($mdDialog, roomService, $ngRedux, $cookies, $state) {
         var ctrl = this;
         var store = $ngRedux;
         ctrl.clickAddNewRoom = clickAddNewRoom;
@@ -17,6 +17,11 @@
             name: '',
             host: store.getState().store.player
         };
+        if ($cookies.getObject('player')) {
+            ctrl.newRoom.host = $cookies.getObject('player');
+            console.log(ctrl.newRoom);
+        }
+
         function clickAddNewRoom(event) {
             var confirm = $mdDialog.prompt()
                 .title('Create new room')
@@ -29,18 +34,21 @@
             $mdDialog.show(confirm).then(function (result) {
                 createNewRoom(result);
             }, function () {
-                console.log('cancel');
             })
         }
 
         function createNewRoom(roomName) {
             ctrl.newRoom.name = roomName;
             roomService.createNewRoom(ctrl.newRoom, function (room) {
-                console.log(room);
                 store.dispatch({
                     type: 'ADD_NEW_ROOM',
                     room: room
-                })
+                });
+                store.dispatch({
+                    type: 'ADD_PLAYER_ROOM',
+                    currentRoom: room
+                });
+                $state.go('gameState');
             })
         }
 

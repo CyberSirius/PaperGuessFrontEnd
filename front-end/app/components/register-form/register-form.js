@@ -14,7 +14,6 @@
         ctrl.sendRegisterInfo = sendRegisterInfo;
         ctrl.user = {};
         function sendRegisterInfo() {
-            console.log(ctrl.user);
         }
     }
 })();
