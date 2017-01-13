@@ -11,15 +11,19 @@
 
     function paperValueController(paperService, $ngRedux) {
         var ctrl = this;
+        var store = $ngRedux;
         ctrl.content = '';
         ctrl.getNextPaper = getNextPaper;
-        ctrl.room = $ngRedux.getState().store.room.currentRoom;
+        var unsubscribe = store.subscribe(function () {
+            ctrl.room = store.getState().store.room.currentRoom;
+            ctrl.player = store.getState().store.player;
+        });
         paperService.getNewCurrentPaper(ctrl.room, function (response) {
-            ctrl.content = response.data.content;
+            ctrl.content = response.data.text;
         });
         function getNextPaper() {
             paperService.getNewCurrentPaper(ctrl.room, function (response) {
-                ctrl.content = response.data.content;
+                ctrl.content = response.data.text;
             })
         }
 

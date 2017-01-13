@@ -1,13 +1,17 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
-        <span>Paper Guess</span>
+        <div>Paper Guess</div>
+        <div>Welcome {{$ctrl.player.name}}! You are in {{$ctrl.room.name}}</div>
+        <div ng-if="$ctrl.isGameStarted">You have to {{$ctrl.role}}</div>
+        <md-button class="md-accent md-raised" ng-click="$ctrl.logOut()">Log out</md-button>
     </div>
 </md-toolbar>
 <div flex layout="row">
     <div flex="50" layout="row" layout-fill>
         <player-list players="$ctrl.room.players" flex="30"></player-list>
         <paper-pieces flex-offset="5" ng-if="$ctrl.isPaperInputAvailable"></paper-pieces>
-        <paper-value flex-offset="" ng-if="$ctrl.isPlayerExplainer"></paper-value>
+        <paper-value flex-offset="5" ng-if="$ctrl.isPlayerExplainer"></paper-value>
+        <timer flex-offset="5" time="30"></timer>
     </div>
     <chat-window flex="50" ng-if="$ctrl.isGameStarted"></chat-window>
 </div>

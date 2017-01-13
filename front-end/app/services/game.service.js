@@ -5,7 +5,9 @@
     function gameService($http) {
         var SERVER_URL = 'http://192.168.0.102/paperguess/api' + '/game';
         return {
-            startGame: startGame
+            startGame: startGame,
+            messageServer: messageServer,
+            nextTurn: nextTurn
         };
         function startGame(room, player, callback) {
             return $http.post(SERVER_URL + '?action=start', {
@@ -15,5 +17,25 @@
                 callback(response);
             })
         }
+
+        function messageServer(content, player, action, room, callback) {
+            var message = {
+                roomId: room.id,
+                content: content,
+                playerId: player.id
+            };
+            return $http.post(SERVER_URL + '?action=' + action, message).then(function (response) {
+                callback(response);
+            });
+        }
+
+        function nextTurn(room, callback) {
+            return $http.post(SERVER_URL + '?action=nextTurn', {
+                "roomId": room.id
+            }).then(function (response) {
+                callback(response);
+            })
+        }
+
     }
 })();

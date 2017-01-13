@@ -14,10 +14,14 @@
         var store = $ngRedux;
         ctrl.counter = 0;
         ctrl.maxWords = 2;
+        var unsubscribe = store.subscribe(function () {
+            ctrl.room = store.getState().store.room.currentRoom;
+            ctrl.player = store.getState().store.player;
+        });
         ctrl.paper = {
             content: '',
-            room: store.getState().store.room.currentRoom,
-            player: store.getState().store.player
+            room: ctrl.room,
+            player: ctrl.player
         };
         ctrl.isInputDisabled = false;
         ctrl.submitPaper = submitPaper;

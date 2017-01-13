@@ -1,5 +1,9 @@
 <md-toolbar>
-    <div class="md-toolbar-tools">Paper Guess</div>
+    <div class="md-toolbar-tools">
+        <div>Paper Guess</div>
+        <div>Welcome {{$ctrl.player.name}}!</div>
+        <md-button class="md-accent md-raised" ng-click="$ctrl.logOut()">Log out</md-button>
+    </div>
 </md-toolbar>
 
 <md-content layout="row" style="margin-top: 50px;" layout-align="center center">

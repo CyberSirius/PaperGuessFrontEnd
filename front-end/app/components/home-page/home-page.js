@@ -13,20 +13,19 @@
         var ctrl = this;
         var store = $ngRedux;
         ctrl.clickAddNewRoom = clickAddNewRoom;
+        ctrl.logOut = logOut;
+        var unsubscribe = store.subscribe(function () {
+            ctrl.player = store.getState().store.player;
+        });
         ctrl.newRoom = {
             name: '',
-            host: store.getState().store.player
+            host: ctrl.player
         };
-        if ($cookies.getObject('player')) {
-            ctrl.newRoom.host = $cookies.getObject('player');
-            console.log(ctrl.newRoom);
-        }
-
         function clickAddNewRoom(event) {
             var confirm = $mdDialog.prompt()
                 .title('Create new room')
                 .textContent("What's the name of the room?")
-                .placeholder('Room name')
+                .placeholder(ctrl.player + 's room')
                 .ariaLabel('Room name')
                 .targetEvent(event)
                 .ok('Okay!')
@@ -51,6 +50,11 @@
                 $state.go('gameState');
             })
         }
+
+        function logOut() {
+            $cookies.remove('player');
+        }
+
 
     }
 })();
